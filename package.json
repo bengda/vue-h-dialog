@@ -2,7 +2,7 @@
   "name": "vue-hu-dialog",
   "description": "a vue dialog component",
   "author": "huyk<bengda@outlook.com>",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "repository": {
     "type": "git",
@@ -37,5 +37,18 @@
     "raw-loader": "^4.0.0",
     "vue-template-compiler": "^2.6.10"
   },
-  "keywords": ["vue", "dialog", "vue-dialog", "model", "vue-model"]
+  "keywords": [
+    "vue",
+    "vuejs",
+    "vue-js",
+    "dialog",
+    "vue-dialog",
+    "modal",
+    "vue-modal",
+    "front-end",
+    "web",
+    "alert",
+    "confirm",
+    "popup"
+  ]
 }

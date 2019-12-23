@@ -1,3 +1,3 @@
 ```js
-npm install vue-h-dialog
+npm install vue-hu-dialog
 ```

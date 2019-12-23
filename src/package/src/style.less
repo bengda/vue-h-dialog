@@ -1,0 +1,429 @@
+/* define */
+@primary-color: #409eff;
+@font-color: #303133;
+@font-color-1: #606266;
+@font-color-2: #c0c4cc;
+@font-size: 14px;
+@font-size--small: 12px;
+@border-color: #dedede;
+@border-color--hover: #c6e2ff;
+@background-color: #fff;
+
+@button-default--hover_background-color: #ecf5ff;
+@button-default--disabled_border-color: #eaeaea;
+
+@button-primary--default_background-color: #409eff;
+@button-primary--default_border-color: #409eff;
+@button-primary--hover_background-color: #66b1ff;
+@button-primary--hover_border-color: #66b1ff;
+@button-primary--disabled_background-color: #a0cfff;
+@button-primary--disabled_border-color: #a0cfff;
+
+@button-warning--default_background-color: #e6a23c;
+@button-warning--default_border-color: #e6a23c;
+@button-warning--hover_background-color: #ebb563;
+@button-warning--hover_border-color: #ebb563;
+@button-warning--disabled_background-color: #f3d19e;
+@button-warning--disabled_border-color: #f3d19e;
+
+@button-danger--default_background-color: #dd6161;
+@button-danger--default_border-color: #dd6161;
+@button-danger--hover_background-color: #f78989;
+@button-danger--hover_border-color: #f78989;
+@button-danger--disabled_background-color: #fab6b6;
+@button-danger--disabled_border-color: #fab6b6;
+
+@button-success--default_background-color: #67c23a;
+@button-success--default_border-color: #67c23a;
+@button-success--hover_background-color: #85ce61;
+@button-success--hover_border-color: #85ce61;
+@button-success--disabled_background-color: #b3e19d;
+@button-success--disabled_border-color: #b3e19d;
+
+@button-info--default_background-color: #909399;
+@button-info--default_border-color: #909399;
+@button-info--hover_background-color: #a6a9ad;
+@button-info--hover_border-color: #a6a9ad;
+@button-info--disabled_background-color: #c8c9cc;
+@button-info--disabled_border-color: #c8c9cc;
+
+@shadow: 0 0 12px 0 rgba(0, 0, 0, .1);
+@mask-background-color: rgba(0, 0, 0, 0.1);
+@header-height: 50px;
+@footer-height: 60px;
+@controls-width: 90px;
+
+[data-scroll-disable] {
+  overflow: hidden !important;
+}
+.vue-h-dialog {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  color: @font-color;
+  box-sizing: border-box;
+  .vue-h-dialog__mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: @mask-background-color;
+  }
+  .vue-h-dialog__main {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: @background-color;
+    box-shadow: @shadow;
+    &:not(.vue-h-dialog__main--ismoving):not(.vue-h-dialog__main--isresizing) {
+      transition: 0.2s ease-in-out;
+      transition-property: width, height, left, top;
+    }
+    &.vue-h-dialog__main--ismoving, &.vue-h-dialog__main--isresizing {
+      user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      -moz-user-select: none;
+    }
+    &.vue-h-dialog__main--isresizing {
+      .vue-h-dialog__main-disable-mask {
+        top: 0;
+      }
+    }
+    .vue-h-dialog__header {
+      display: flex;
+      align-items: center;
+      min-height: @header-height;
+      height: @header-height;
+      border-bottom: 1px solid @border-color;
+      font-size: @font-size;
+      .vue-h-dialog__title {
+        flex: 1 0;
+        width: 100%;
+        line-height: @header-height;
+        padding-left: @controls-width;
+        text-align: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        span {
+          position: relative;
+          vertical-align: middle;
+          z-index: 9;
+        }
+      }
+      .vue-h-dialog__controls {
+        display: inline-block;
+        min-width: @controls-width;
+        width: @controls-width;
+        text-align: right;
+        padding: 0 15px;
+        user-select: none;
+        box-sizing: border-box;
+        .vue-h-dialog__control-btn {
+          display: inline-block;
+          position: relative;
+          padding: 5px;
+          z-index: 9;
+          cursor: pointer;
+          &:hover {
+            color: @font-color-1;
+          }
+        }
+      }
+    }
+    .vue-h-dialog__content {
+      position: relative;
+      // ie下一定要写auto否则高度不会被内容撑开
+      flex: 1 0 auto;
+      height: 100%;
+      overflow: hidden;
+      z-index: 9;
+    }
+    .vue-h-dialog__footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: @footer-height;
+      height: @footer-height;
+      border-top: 1px solid @border-color;
+    }
+    .vue-h-dialog__main-disable-mask {
+      position: absolute;
+      left: 0;
+      top: @header-height;
+      right: 0;
+      bottom: 0;
+    }
+    /* 可拖曳区域 */
+    .vue-h-dialog__drag-area {
+      position: absolute;
+      user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      -moz-user-select: none;
+      // cursor: move;
+    }
+    /* 虚拟移动框 */
+    .vue-h-dialog__shadow {
+      position: fixed;
+      background-color: transparent;
+      box-shadow: @shadow;
+      // cursor: move;
+    }
+    /* 拖曳resize */
+    .vue-h-dialog__resize-bar {
+      position: absolute;
+      z-index: 9;
+      &.vue-h-dialog__resize-bar--top {
+        top: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        cursor: ns-resize;
+      }
+      &.vue-h-dialog__resize-bar--right {
+        top: 0;
+        right: -2px;
+        width: 2px;
+        height: 100%;
+        cursor: ew-resize;
+      }
+      &.vue-h-dialog__resize-bar--bottom {
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        cursor: ns-resize;
+      }
+      &.vue-h-dialog__resize-bar--left {
+        top: 0;
+        left: -2px;
+        width: 2px;
+        height: 100%;
+        cursor: ew-resize;
+      }
+      &.vue-h-dialog__resize-bar--top-right {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        top: -4px;
+        right: -4px;
+        z-index: 1;
+        cursor: ne-resize;
+      }
+      &.vue-h-dialog__resize-bar--top-left {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        top: -4px;
+        left: -4px;
+        z-index: 1;
+        cursor: nw-resize;
+      }
+      &.vue-h-dialog__resize-bar--bottom-right {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        bottom: -4px;
+        right: -4px;
+        z-index: 1;
+        cursor: se-resize;
+      }
+      &.vue-h-dialog__resize-bar--bottom-left {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        bottom: -4px;
+        left: -4px;
+        z-index: 1;
+        cursor: sw-resize;
+      }
+    }
+    /* 加载动画 */
+    .vue-h-dialog__loading-mask {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background-color: @mask-background-color;
+      transition: opacity 0.3s;
+      .vue-h-dialog__loading-text {
+        font-size: @font-size--small;
+        line-break: 1.5;
+        margin-top: 10px;
+        color: @primary-color;
+      }
+      .vue-h-dialog__loading-spinner {
+        position: absolute;
+        top: 50%;
+        margin-top: -21px;
+        width: 100%;
+        text-align: center;
+        .circular {
+          height: 42px;
+          width: 42px;
+          animation: loading-rotate 2s linear infinite;
+          .path {
+            animation: loading-dash 1.5s ease-in-out infinite;
+            stroke-dasharray: 90,150;
+            stroke-dashoffset: 0;
+            stroke-width: 2;
+            stroke: @primary-color;
+            stroke-linecap: round;
+          }
+        }
+      }
+    }
+  }
+  .vue-h-dialog__button {
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    background: @background-color;
+    border: 1px solid @border-color;
+    color: @font-color-1;
+    -webkit-appearance: none;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    transition: .1s;
+    font-weight: 500;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    padding: 9px 15px;
+    font-size: @font-size--small;
+    border-radius: 3px;
+    z-index: 9;
+    &+.vue-h-dialog__button {
+      margin-left: 10px;
+    }
+    &:active {
+      outline: none;
+      appearance: none;
+    }
+    &:hover {
+      color: @primary-color;
+      border-color: @border-color--hover;
+      background-color: @button-default--hover_background-color;
+    }
+    &.is-disabled, &.is-disabled:focus, &.is-disabled:active, &.is-disabled:hover {
+      color: @font-color-2;
+      cursor: not-allowed;
+      background-image: none;
+      background-color: #fff;
+      border-color: @button-default--disabled_border-color;
+    }
+    &--primary {
+      color: #fff;
+      background-color: @button-primary--default_background-color;
+      border-color: @button-primary--default_border-color;
+      &:active, &:hover {
+        color: #fff;
+        background-color: @button-primary--hover_background-color;
+        border-color: @button-primary--hover_border-color;
+      }
+      &.is-disabled, &.is-disabled:focus, &.is-disabled:active, &.is-disabled:hover {
+        color: #fff;
+        cursor: not-allowed;
+        background-image: none;
+        background-color: @button-primary--disabled_background-color;
+        border-color: @button-primary--disabled_border-color;
+      }
+    }
+
+    &--warning {
+      color: #fff;
+      background-color: @button-warning--default_background-color;
+      border-color: @button-warning--default_border-color;
+      &:active, &:hover {
+        color: #fff;
+        background-color: @button-warning--hover_background-color;
+        border-color: @button-warning--hover_border-color;
+      }
+      &.is-disabled, &.is-disabled:focus, &.is-disabled:active, &.is-disabled:hover {
+        color: #fff;
+        cursor: not-allowed;
+        background-image: none;
+        background-color: @button-warning--disabled_background-color;
+        border-color: @button-warning--disabled_border-color;
+      }
+    }
+
+    &--danger {
+      color: #fff;
+      background-color: @button-danger--default_background-color;
+      border-color: @button-danger--default_border-color;
+      &:active, &:hover {
+        color: #fff;
+        background-color: @button-danger--hover_background-color;
+        border-color: @button-danger--hover_border-color;
+      }
+      &.is-disabled, &.is-disabled:focus, &.is-disabled:active, &.is-disabled:hover {
+        color: #fff;
+        cursor: not-allowed;
+        background-image: none;
+        background-color: @button-danger--disabled_background-color;
+        border-color: @button-danger--disabled_border-color;
+      }
+    }
+
+    &--success {
+      color: #fff;
+      background-color: @button-success--default_background-color;
+      border-color: @button-success--default_border-color;
+      &:active, &:hover {
+        color: #fff;
+        background-color: @button-success--hover_background-color;
+        border-color: @button-success--hover_border-color;
+      }
+      &.is-disabled, &.is-disabled:focus, &.is-disabled:active, &.is-disabled:hover {
+        color: #fff;
+        cursor: not-allowed;
+        background-image: none;
+        background-color: @button-success--disabled_background-color;
+        border-color: @button-success--disabled_border-color;
+      }
+    }
+
+    &--info {
+      color: #fff;
+      background-color: @button-info--default_background-color;
+      border-color: @button-info--default_border-color;
+      &:active, &:hover {
+        color: #fff;
+        background-color: @button-info--hover_background-color;
+        border-color: @button-info--hover_border-color;
+      }
+      &.is-disabled, &.is-disabled:focus, &.is-disabled:active, &.is-disabled:hover {
+        color: #fff;
+        cursor: not-allowed;
+        background-image: none;
+        background-color: @button-info--disabled_background-color;
+        border-color: @button-info--disabled_border-color;
+      }
+    }
+  }
+  @keyframes loading-rotate{to{transform:rotate(1turn)}}
+  @keyframes loading-dash {
+    0% {
+      stroke-dasharray: 1,200;
+      stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 90,150;
+        stroke-dashoffset: -40px;
+    }
+    100% {
+        stroke-dasharray: 90,150;
+        stroke-dashoffset: -120px;
+    }
+  }
+}

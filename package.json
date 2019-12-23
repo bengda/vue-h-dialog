@@ -1,0 +1,41 @@
+{
+  "name": "vue-hu-dialog",
+  "description": "a vue dialog component",
+  "author": "huyk<bengda@outlook.com>",
+  "version": "0.0.1",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bengda/vue-h-dialog.git"
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build-lib": "vue-cli-service build --target lib --dest lib --name vueHDialog src/package/index.js",
+    "lint": "vue-cli-service lint"
+  },
+  "main": "lib/vueHDialog.common.js",
+  "dependencies": {
+    "core-js": "^3.4.3",
+    "highlight.js": "^9.17.1",
+    "marked": "^0.8.0",
+    "resize-observer-polyfill": "^1.5.1",
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-eslint": "^4.1.0",
+    "@vue/cli-service": "^4.1.0",
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "html-loader": "^0.5.5",
+    "less": "^3.0.4",
+    "less-loader": "^5.0.0",
+    "markdown-loader": "^5.1.0",
+    "raw-loader": "^4.0.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "keywords": ["vue", "dialog", "vue-dialog", "model", "vue-model"]
+}

@@ -1,7 +1,7 @@
 /**
  * 一些工具方法
  * @author huyk<bengda@outlook.com>
- * @version 0.0.1
+ * @version 0.0.2
  * @module Helper
  */
 import {
@@ -659,9 +659,11 @@ function _getNamespaceReference(root, scheme, { containProto = false, keysRange 
         refer.key = key;
         return true;
       }
+    } else {
+      refer.result = null;
+      refer.key = key;
+      return true;
     }
-    refer.result = null;
-    refer.key = key;
     return false;
   });
 

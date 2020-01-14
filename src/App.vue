@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <h2 class="art-title">vue-h-dialog</h2>
+    <h2 class="art-title">vue-hu-dialog</h2>
     <section style="margin-top: 50px">
       <div class="buttons">
         <button @click="lang='zh-cn'" class="button" :class="{ 'button--primary': lang === 'zh-cn' }">zh-cn</button>
@@ -856,6 +856,7 @@ export default {
           okHandler: () => {
             this.$hDialog({
               html: '<div class="tip">zIndex: 505</div>',
+              lang: this.lang,
               zIndex: 505,
             });
           },
@@ -863,6 +864,7 @@ export default {
             this.$hDialog({
               html: '<div class="tip">zIndex: 503</div>',
               left: '20px',
+              lang: this.lang,
               zIndex: 503,
             });
           },
@@ -878,12 +880,14 @@ export default {
     moveableDialog(arg) {
       this.$hDialog({
         html: `<div class="tip" style="text-align:center">${this.$i18n('拖曳头部区域')}</div>`,
+        lang: this.lang,
         moveable: arg,
       });
     },
     shadowMoveDialog(arg) {
       this.$hDialog({
         html: `<div class="tip" style="text-align:center">${this.$i18n('拖曳头部区域')}</div>`,
+        lang: this.lang,
         shadowMove: arg,
       });
     },

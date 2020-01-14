@@ -458,9 +458,10 @@ export default {
     },
     visible(v) {
       if (v) {
-        this.setBCR();
         if (this.isMax) {
           this.setDialogMax();
+        } else {
+          this.setBCR();
         }
         this.$emit('on-open', this);
 
@@ -542,14 +543,14 @@ export default {
     computedContentStyles() {
       const style = {};
       if (this.dialogBCR) {
-        const { clientHeight } = document.documentElement;
+        const { innerHeight } = window;
         const { height } = this.dialogBCR;
         let { minHeight, maxHeight } = this.dialogBCR;
         if (this.dialogMinHeight) {
-          minHeight = this.computePrimitiveValue(this.dialogMinHeight, clientHeight);
+          minHeight = this.computePrimitiveValue(this.dialogMinHeight, innerHeight);
         }
         if (this.dialogMaxHeight) {
-          maxHeight = this.computePrimitiveValue(this.dialogMaxHeight, clientHeight);
+          maxHeight = this.computePrimitiveValue(this.dialogMaxHeight, innerHeight);
         }
         const { headerHeight, footerHeight } = this;
         const computedMinHeight = minHeight - headerHeight - footerHeight;
@@ -812,30 +813,30 @@ export default {
       this.vueComponentIns = new InsConstructor({ el: mountNode });
     },
     setBCR(bcr = {}) {
-      const { clientWidth, clientHeight } = document.documentElement;
+      const { innerWidth, innerHeight } = window;
       let width = this.computePrimitiveValue(
         this.dialogWidth || this.width,
-        clientWidth,
+        innerWidth,
       );
       let height = this.computePrimitiveValue(
         this.dialogHeight || this.height,
-        clientHeight,
+        innerHeight,
       );
       const minWidth = this.computePrimitiveValue(
         this.dialogMinWidth || this.minWidth,
-        clientWidth,
+        innerWidth,
       );
       const maxWidth = this.computePrimitiveValue(
         this.dialogMaxWidth || this.maxWidth,
-        clientWidth,
+        innerWidth,
       );
       const minHeight = this.computePrimitiveValue(
         this.dialogMinHeight || this.minHeight,
-        clientHeight,
+        innerHeight,
       );
       const maxHeight = this.computePrimitiveValue(
         this.dialogMaxHeight || this.maxHeight,
-        clientHeight,
+        innerHeight,
       );
       if (isNumeric(width)) {
         if (isNumeric(minWidth)) {
@@ -858,12 +859,12 @@ export default {
       const $width = isNumeric(width) ? width : this.renderedDialogBCR.width;
       const $height = isNumeric(height) ? height : this.renderedDialogBCR.height;
       const left = this.computePrimitiveValue(
-        isNumeric($left) ? $left : ($left || (clientWidth - $width) / 2),
-        clientWidth,
+        isNumeric($left) ? $left : ($left || (innerWidth - $width) / 2),
+        innerWidth,
       );
       const top = this.computePrimitiveValue(
-        isNumeric($top) ? $top : ($top || (clientHeight - $height) / 2),
-        clientHeight,
+        isNumeric($top) ? $top : ($top || (innerHeight - $height) / 2),
+        innerHeight,
       );
       const dialogBCR = {
         width,
@@ -890,26 +891,26 @@ export default {
     limitEdgeBCRValue(_bcr) {
       const bcr = _bcr;
       if (bcr && !this.overEdge) {
-        const { clientWidth, clientHeight } = document.documentElement;
+        const { innerWidth, innerHeight } = window;
         Object.entries(bcr).forEach(([prop]) => {
           switch (prop) {
             case 'width':
-              bcr.width = Math.min(clientWidth, bcr.width);
+              bcr.width = Math.min(innerWidth, bcr.width);
               break;
             case 'minWidth':
               bcr.minWidth = Math.max(0, bcr.minWidth);
               break;
             case 'maxWidth':
-              bcr.maxWidth = Math.min(clientWidth, bcr.maxWidth);
+              bcr.maxWidth = Math.min(innerWidth, bcr.maxWidth);
               break;
             case 'height':
-              bcr.height = Math.min(clientHeight, bcr.height);
+              bcr.height = Math.min(innerHeight, bcr.height);
               break;
             case 'minheight':
               bcr.minHeight = Math.max(0, bcr.minHeight);
               break;
             case 'maxheight':
-              bcr.maxHeight = Math.min(clientHeight, bcr.maxHeight);
+              bcr.maxHeight = Math.min(innerHeight, bcr.maxHeight);
               break;
             case 'left': {
               if (bcr.left < 0) {
@@ -917,7 +918,7 @@ export default {
                 break;
               }
               const width = isNumeric(bcr.width) ? bcr.width : this.renderedDialogBCR.width;
-              bcr.left = Math.min(bcr.left, clientWidth - Math.min(clientWidth, width));
+              bcr.left = Math.min(bcr.left, innerWidth - Math.min(innerWidth, width));
               break;
             }
             case 'top': {
@@ -926,7 +927,7 @@ export default {
                 break;
               }
               const height = isNumeric(bcr.height) ? bcr.height : this.renderedDialogBCR.height;
-              bcr.top = Math.min(bcr.top, clientHeight - Math.min(clientHeight, height));
+              bcr.top = Math.min(bcr.top, innerHeight - Math.min(innerHeight, height));
               break;
             }
             default:

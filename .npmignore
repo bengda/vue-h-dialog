@@ -4,6 +4,10 @@ node_modules
 /docs
 /public
 /src
+*.map
+*.umd.*
+*.min.*
+*.html
 
 # local env files
 .env.local

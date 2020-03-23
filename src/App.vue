@@ -515,8 +515,9 @@
 </template>
 
 <script>
+import '../lib/vueHDialog.css';
 import Vue from 'vue';
-import VueDialog from '@/package';
+import VueDialog from '../lib/vueHDialog.common';
 import DocTable from '@/components/DocTable';
 import { transpileMarkdown } from './marked';
 

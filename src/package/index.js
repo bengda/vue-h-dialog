@@ -221,7 +221,7 @@ vueHDialog.close = function close(...gIds) {
 };
 
 vueHDialog.install = function install(Vue, {
-  compnentName = 'VueDialog',
+  componentName = 'VueDialog',
   propertyName = 'hDialog',
   zIndex = 504,
   lang = 'zh-cn',
@@ -232,7 +232,7 @@ vueHDialog.install = function install(Vue, {
   template.lang = lang;
 
   Vue.prototype[`$${propertyName}`] = vueHDialog;
-  Vue.component(compnentName || template.name, template);
+  Vue.component(componentName || template.name, template);
 };
 
 vueHDialog.template = template;

@@ -481,6 +481,9 @@ export default {
           this._html._vhd_html_restore_points.pop().replaceWith(this._html);
         }
 
+        // 还原挂载的html初始样式
+        this._html.setAttribute('style', this._htmlStyleAttr);
+
         this.handleEnableBodyScroll();
 
         this.$emit('on-close', this);
@@ -752,6 +755,7 @@ export default {
         this.$refs.htmlBox.innerHTML = html;
       } else if (isDom(html)) {
         this._html = html;
+        this._htmlStyleAttr = html.getAttribute('style');
         // 设置还原点
         const restoreEle = document.createElement('b');
         restoreEle.id = `vhd_${generateUuid(8, 62)}`;
@@ -766,7 +770,7 @@ export default {
         html.replaceWith(restoreEle);
 
         this.$refs.htmlBox.appendChild(html);
-        html.style.display = '';
+        html.style.display = 'block';
       }
     },
     mountComponents() {
